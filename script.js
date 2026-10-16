@@ -1,8 +1,137 @@
 // KARAMERU - メニュー・写真スライダー・背景演出
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const intro=document.getElementById('intro');
-window.addEventListener('load',()=>setTimeout(()=>intro.classList.add('hide'),reduced?0:1100));
-setTimeout(()=>intro.classList.add('hide'),2800);
+
+// ==========================================
+// KARAMERU - 重力操作オープニング
+// ==========================================
+
+// 動きを減らす設定を確認
+const reduced = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+).matches;
+
+// オープニング画面
+const intro = document.getElementById('intro');
+
+// 粒子と破片の配置場所
+const gravityParticles = document.getElementById('gravityParticles');
+const gravityDebris = document.getElementById('gravityDebris');
+
+// 演出終了用
+let introTimer;
+
+// オープニングを終了する
+function finishGravityIntro() {
+    if (!intro) return;
+
+    intro.classList.add('hide');
+
+    // アニメーション終了後に要素を取り除く
+    window.setTimeout(() => {
+        intro.remove();
+    }, 900);
+}
+
+// 粒子・破片を作る
+function createGravityEffects() {
+
+    if (reduced) return;
+    if (!gravityParticles || !gravityDebris) return;
+
+    // 赤い粒子を生成
+    for (let i = 0; i < 45; i++) {
+
+        const particle = document.createElement('span');
+
+        particle.className = 'gravity-particle';
+
+        particle.style.setProperty(
+            '--x',
+            Math.random() * 100 + '%'
+        );
+
+        particle.style.setProperty(
+            '--y',
+            Math.random() * 100 + '%'
+        );
+
+        particle.style.setProperty(
+            '--size',
+            (2 + Math.random() * 5) + 'px'
+        );
+
+        particle.style.setProperty(
+            '--delay',
+            (Math.random() * 0.7) + 's'
+        );
+
+        gravityParticles.appendChild(particle);
+    }
+
+    // 浮遊する破片を生成
+    for (let i = 0; i < 18; i++) {
+
+        const debris = document.createElement('span');
+
+        debris.className = 'gravity-debris-piece';
+
+        debris.style.setProperty(
+            '--x',
+            Math.random() * 100 + '%'
+        );
+
+        debris.style.setProperty(
+            '--y',
+            Math.random() * 100 + '%'
+        );
+
+        debris.style.setProperty(
+            '--size',
+            (5 + Math.random() * 14) + 'px'
+        );
+
+        debris.style.setProperty(
+            '--delay',
+            (Math.random() * 0.6) + 's'
+        );
+
+        gravityDebris.appendChild(debris);
+    }
+}
+
+// オープニング開始
+function startGravityIntro() {
+
+    if (!intro) return;
+
+    // アクセシビリティ設定を優先
+    if (reduced) {
+        finishGravityIntro();
+        return;
+    }
+
+    createGravityEffects();
+
+    // 3.6秒の演出後にサイトを表示
+    introTimer = window.setTimeout(() => {
+        finishGravityIntro();
+    }, 3600);
+}
+
+// ページを開いたら開始
+if (document.readyState === 'loading') {
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        startGravityIntro,
+        { once: true }
+    );
+
+} else {
+
+    startGravityIntro();
+
+}
+
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=> {
     if(entry.isIntersecting) {
         entry.target.classList.add('visible');revealObserver.unobserve(entry.target)
