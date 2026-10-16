@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <meta content="#100d0f" name="theme-color"/>
+  <meta content="KARAMERU | Cosplay portfolio" name="description"/>
+  <title>
+   KARAMERU — COSPLAY ARCHIVE
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Noto+Sans+JP:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" class="transition-veil" id="veil">
+  </div>
+  <div aria-hidden="true" class="ambient" id="ambient">
+  </div>
+  <div class="progress" id="progress">
+  </div>
+  <div class="grain">
+  </div>
+  <div class="intro" id="intro">
+   <span>
+    KARAMERU
+   </span>
+   <small>
+    COSPLAY ARCHIVE
+   </small>
+  </div>
+  <header>
+   <a class="brand" href="#home">
+    KARAMERU.
+   </a>
+   <button aria-label="メニューを開く" class="menu-btn" id="menuBtn">
+    ☰
+   </button>
+  </header>
+  <nav aria-hidden="true" aria-label="メインメニュー" class="menu" id="menu">
+   <div class="menu-caption">
+    THE WORLD OF KARAMERU
+   </div>
+   <button aria-label="閉じる" class="close-menu" id="closeMenu">
+    ×
+   </button>
+   <a href="#home">
+    Home
+   </a>
+   <a href="#about">
+    About
+   </a>
+   <a href="#gallery">
+    Gallery
+   </a>
+   <a href="#event">
+    Event
+   </a>
+   <a href="#social">
+    Social
+   </a>
+  </nav>
+  <section class="hero" id="home">
+   <div class="hero-image">
+    <img alt="中原中也のコスプレ写真" fetchpriority="high" src="assets/chuya.jpg"/>
+   </div>
+   <div class="particles" id="particles">
+   </div>
+   <div class="hero-content">
+    <div class="eyebrow">
+     Cosplay portfolio 
+    </div>
+    <h1>
+     からめる
+     <span style="color:var(--gold)">
+      .
+     </span>
+    </h1>
+    <div class="hero-sub">
+     A LITTLE WORLD OF MY OWN
+    </div>
+   </div>
+   <div class="scroll-note">
+    SCROLL TO EXPLORE
+   </div>
+  </section>
+  <main>
+   <section class="section" id="about">
+    <div class="section-number reveal">
+     01 / PROFILE
+    </div>
+    <h2 class="reveal">
+     Behind the
+     <i>
+      Mask.
+     </i>
+    </h2>
+    <div class="about-grid">
+     <div class="about-art reveal">
+      <img alt="からめるの中原中也コスプレ写真" loading="lazy" src="assets/chuya.jpg"/>
+     </div>
+     <div class="about-copy reveal">
+      <div class="eyebrow">
+       Nice to meet you
+      </div>
+      <h2 style="font-size:57px;margin:12px 0">
+       からめる。
+      </h2>
+      <div class="line">
+      </div>
+      <p>
+       20↑/🚹
+       <br/>
+       いつまで経っても初心者並みの重加工レイヤーです！！※存在しません。
+       <br/>
+       文豪ストレイドッグスの中原中也を中心に、さまざまな作品のコスプレをしています。
+      </p>
+      <div>
+       <span class="tag">
+        Bungo Stray Dogs
+       </span>
+       <span class="tag">
+        Cosplay
+       </span>
+       <span class="tag">
+        Portrait
+       </span>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="gallery" id="gallery">
+    <div class="section gallery-inner">
+     <div class="section-number reveal">
+      02 / CHARACTER ARCHIVE
+     </div>
+     <h2 class="reveal">
+      The
+      <i>
+       Archive.
+      </i>
+     </h2>
+     <p class="gallery-note reveal">
+      キャラクターを選んで写真を絞り込み。左右にスワイプして見ることができます。
+     </p>
+     <div aria-label="キャラクターで絞り込む" class="filters reveal" role="group">
+      <button aria-pressed="true" class="filter" data-filter="all">
+       ALL
+      </button>
+      <button aria-pressed="false" class="filter" data-filter="chuya">
+       中原中也
+      </button>
+      <button aria-pressed="false" class="filter" data-filter="dazai">
+       太宰治
+      </button>
+      <button aria-pressed="false" class="filter" data-filter="loren">
+       ローレン
+      </button>
+     </div>
+     <!-- 写真ギャラリー -->
+<div
+    aria-label="コスプレ写真の横スクロールギャラリー"
+    class="archive-slider reveal"
+    id="archiveSlider"
+    tabindex="0"
+>
+
+    <!-- 中原中也：1枚目 -->
+    <button
+        type="button"
+        class="slide"
+        data-character="chuya"
+        data-photo="assets/chuya.jpg"
+        data-caption="中原中也 / 文豪ストレイドッグス"
+        aria-label="中原中也の写真1を拡大"
+    >
+        <img
+            src="assets/chuya.jpg"
+            alt="中原中也のコスプレ1"
+            loading="lazy"
+        >
+
+        <span class="slide-info">
+            <small>BUNGO STRAY DOGS</small>
+            <strong>Chuya Nakahara</strong>
+        </span>
+    </button>
+
+      <!-- 中原中也：2枚目 -->
+    <button
+        type="button"
+        class="slide"
+        data-character="chuya"
+        data-photo="assets/IMG_9662.jpg"
+        data-caption="中原中也 / 文豪ストレイドッグス"
+        aria-label="中原中也の写真2を拡大"
+    >
+        <img
+            src="assets/IMG_9662.jpg"
+            alt="中原中也のコスプレ2"
+            loading="lazy"
+        >
+
+        <span class="slide-info">
+            <small>BUNGO STRAY DOGS</small>
+            <strong>Chuya Nakahara</strong>
+        </span>
+    </button>
+
+    <!-- 中原中也：3枚目 -->
+    <button
+        type="button"
+        class="slide"
+        data-character="chuya"
+        data-photo="assets/IMG_9689.jpg"
+        data-caption="中原中也 / 文豪ストレイドッグス"
+        aria-label="中原中也の写真3を拡大"
+    >
+        <img
+            src="assets/IMG_9689.jpg"
+            alt="中原中也のコスプレ3"
+            loading="lazy"
+        >
+
+        <span class="slide-info">
+            <small>BUNGO STRAY DOGS</small>
+            <strong>Chuya Nakahara</strong>
+        </span>
+    </button>
+      
+<!-- ======================== -->
+<!-- 太宰治：1枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="dazai"
+    data-photo="assets/IMG_9766.jpg"
+    data-caption="太宰治 / 文豪ストレイドッグス"
+    aria-label="太宰治の写真を拡大"
+>
+    <img
+        src="assets/IMG_9766.jpg"
+        alt="太宰治のコスプレ"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            BUNGO STRAY DOGS
+        </small>
+
+        <strong>
+            Osamu Dazai
+        </strong>
+    </span>
+</button>
+
+<!-- ======================== -->
+<!-- 太宰治：2枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="dazai"
+    data-photo="assets/IMG_9763.jpg"
+    data-caption="太宰治 / 文豪ストレイドッグス"
+    aria-label="太宰治の写真2を拡大"
+>
+    <img
+        src="assets/IMG_9763.jpg"
+        alt="太宰治のコスプレ2枚目"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            BUNGO STRAY DOGS
+        </small>
+
+        <strong>
+            Osamu Dazai
+        </strong>
+    </span>
+</button>
+
+<!-- ======================== -->
+<!-- ローレン：1枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="loren"
+    data-photo="assets/loren.jpg"
+    data-caption="ローレン・イロアス / にじさんじ"
+    aria-label="ローレンの写真1を拡大"
+>
+    <img
+        src="assets/loren.jpg"
+        alt="ローレンのコスプレ1枚目"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            NIJISANJI
+        </small>
+
+        <strong>
+            Loren Iroas
+        </strong>
+    </span>
+</button>
+
+<!-- ======================== -->
+<!-- ローレン：2枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="loren"
+    data-photo="assets/loren02.jpg"
+    data-caption="ローレン・イロアス / にじさんじ"
+    aria-label="ローレンの写真2を拡大"
+>
+    <img
+        src="assets/loren02.jpg"
+        alt="ローレンのコスプレ2枚目"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            NIJISANJI
+        </small>
+
+        <strong>
+            Loren Iroas
+        </strong>
+    </span>
+</button>
+
+<!-- ======================== -->
+<!-- ローレン：3枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="loren"
+    data-photo="assets/loren03.jpg"
+    data-caption="ローレン・イロアス / にじさんじ"
+    aria-label="ローレンの写真3を拡大"
+>
+    <img
+        src="assets/loren03.jpg"
+        alt="ローレンのコスプレ3枚目"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            NIJISANJI
+        </small>
+
+        <strong>
+            Loren Iroas
+        </strong>
+    </span>
+</button>
+
+<!-- ======================== -->
+<!-- ローレン：4枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="loren"
+    data-photo="assets/loren04.jpg"
+    data-caption="ローレン・イロアス / にじさんじ"
+    aria-label="ローレンの写真4を拡大"
+>
+    <img
+        src="assets/loren04.jpg"
+        alt="ローレンのコスプレ4枚目"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            NIJISANJI
+        </small>
+
+        <strong>
+            Loren Iroas
+        </strong>
+    </span>
+</button>
+
+<!-- ======================== -->
+<!-- ローレン：5枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="loren"
+    data-photo="assets/loren05.jpg"
+    data-caption="ローレン・イロアス / にじさんじ"
+    aria-label="ローレンの写真5を拡大"
+>
+    <img
+        src="assets/loren05.jpg"
+        alt="ローレンのコスプレ5枚目"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            NIJISANJI
+        </small>
+
+        <strong>
+            Loren Iroas
+        </strong>
+    </span>
+</button>
+
+<!-- ======================== -->
+<!-- ローレン：2枚目 -->
+<!-- ======================== -->
+
+<button
+    type="button"
+    class="slide"
+    data-character="loren"
+    data-photo="assets/loren06.jpg"
+    data-caption="ローレン・イロアス / にじさんじ"
+    aria-label="ローレンの写真6を拡大"
+>
+    <img
+        src="assets/loren06.jpg"
+        alt="ローレンのコスプレ6枚目"
+        loading="lazy"
+    >
+
+    <span class="slide-info">
+        <small>
+            NIJISANJI
+        </small>
+
+        <strong>
+            Loren Iroas
+        </strong>
+    </span>
+</button>
+
+     </div>
+     <div class="slider-controls">
+      <span aria-live="polite" id="slideCount">
+       01 / 03
+      </span>
+      <div class="slider-arrows">
+       <button aria-label="前の写真" id="prevSlide" type="button">
+        ←
+       </button>
+       <button aria-label="次の写真" id="nextSlide" type="button">
+        →
+       </button>
+      </div>
+     </div>
+     <p class="hint">
+      写真をタップすると拡大できます。
+     </p>
+    </div>
+   </section>
+  
+
+<!-- ======================== -->
+<!-- NEXT EVENT -->
+<!-- ======================== -->
+
+<section class="section" id="event">
+
+    <div class="section-number reveal">
+        03 / SCHEDULE
+    </div>
+
+    <h2 class="reveal">
+        Next <i>Scene.</i>
+    </h2>
+
+    <!-- カード全体をリンクにする -->
+    <a
+        class="event-card reveal"
+        href="https://acosta.jp/event/tsuruma/261031-2/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="イベントの詳細を見る"
+    >
+
+        <div>
+            <strong>
+                acosta!
+            </strong>
+
+            <br>
+
+            <span>
+                2026.10.31 / acosta!鶴舞公園
+            </span>
+
+            <br>
+
+            <span>
+                COSPLAY：太宰治
+            </span>
+        </div>
+
+        <span aria-hidden="true">
+            ✦
+        </span>
+
+    </a>
+    <a
+        class="event-card reveal"
+        href="https://5ani.jp/upcoming/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="イベントの詳細を見る"
+    >
+
+        <div>
+            <strong>
+                いつアニ
+            </strong>
+
+            <br>
+
+            <span>
+                2026.11.15 / いつアニ
+            </span>
+
+            <br>
+
+            <span>
+                COSPLAY：中原中也
+            </span>
+        </div>
+
+        <span aria-hidden="true">
+            ✦
+        </span>
+
+    </a>
+
+</section>
+
+
+   <section class="social" id="social">
+    <div class="section-number reveal">
+     04 / CONNECT
+    </div>
+    <h2 class="reveal">
+     Stay in
+     <i style="color:var(--gold)">
+      Touch.
+     </i>
+    </h2>
+    <p class="reveal">
+     また、どこかで。
+    </p>
+    <div class="social-links reveal">
+     <a href="https://x.com/karameru_0213?s=11&t=49StYu8RQAa895JLCqdH_w" rel="noopener noreferrer" target="_blank" title="自分のXアカウントURLに変更してください">
+      X / Twitter ↗
+     </a>
+     <a href="https://www.tiktok.com/@karameru8903?_r=1&_t=ZS-9AbNkx7n0po" rel="noopener noreferrer" target="_blank" title="自分のTikTokアカウントURLに変更してください">
+      TikTok ↗
+     </a>
+    </div>
+    <p class="hint">
+     公開前にSNSリンクを自分のURLに変更してください。
+    </p>
+   </section>
+  </main>
+  <footer>
+   <span>
+    © KARAMERU
+   </span>
+   <span>
+    MADE WITH LOVE &amp; A LITTLE DRAMA
+   </span>
+  </footer>
+  <div aria-label="写真の拡大表示" aria-modal="true" class="lightbox" id="lightbox" role="dialog">
+   <button aria-label="写真を閉じる" id="closeLightbox">
+    ×
+   </button>
+   <img alt="拡大したコスプレ写真" id="lightboxImg"/>
+   <span class="lightbox-caption" id="lightboxCaption">
+   </span>
+  </div>
+  <script defer="" src="script.js">
+  </script>
+ </body>
+</html>
+
