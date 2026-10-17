@@ -310,3 +310,459 @@ if(!reduced) {
         holder.appendChild(p)
     }
 }
+
+
+// ==========================================
+// KARAMERU / CINEMA MODE
+// ==========================================
+
+(() => {
+
+    // 5秒ごとに写真を切り替える
+    const CINEMA_INTERVAL = 5000;
+
+    // 各要素を取得
+    const cinema = document.getElementById("cinemaMode");
+    const openButton = document.getElementById("cinemaOpen");
+    const closeButton = document.getElementById("cinemaClose");
+
+    const photo = document.getElementById("cinemaPhoto");
+    const counter = document.getElementById("cinemaCounter");
+    const title = document.getElementById("cinemaTitle");
+
+    const prevButton = document.getElementById("cinemaPrev");
+    const playButton = document.getElementById("cinemaPlay");
+    const nextButton = document.getElementById("cinemaNext");
+    const progressBar = document.getElementById("cinemaProgressBar");
+
+    // HTMLが揃っていない場合は実行しない
+    if (
+        !cinema || !openButton || !closeButton ||
+        !photo || !counter || !title ||
+        !prevButton || !playButton || !nextButton ||
+        !progressBar
+    ) {
+        return;
+    }
+
+    // ギャラリーから写真を取得
+    function getCinemaPhotos() {
+
+        const slides = document.querySelectorAll(
+            ".slide img"
+        );
+
+        return Array.from(slides)
+            .filter(img => img.getAttribute("src"))
+            .map(img => {
+
+                const slide = img.closest(".slide");
+
+                return {
+                    src: slide?.dataset.photo ||
+                         img.getAttribute("src"),
+
+                    title:
+                        slide?.dataset.caption ||
+                        img.alt ||
+                        "COSPLAY"
+                };
+            });
+    }
+
+    let photos = [];
+    let currentIndex = 0;
+
+    let timer = null;
+    let transitionTimer = null;
+    let isPlaying = true;
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // 進行バーを最初に戻す
+    function resetProgress() {
+
+        progressBar.style.transition = "none";
+        progressBar.style.width = "0%";
+
+        if (!isPlaying || reducedMotion) return;
+
+        // 次の描画タイミングで進行開始
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                progressBar.style.transition =
+                    `width ${CINEMA_INTERVAL}ms linear`;
+
+                progressBar.style.width = "100%";
+            });
+        });
+    }
+
+    // 写真を表示
+    function showCinemaPhoto(index) {
+
+        if (photos.length === 0) return;
+
+        currentIndex =
+            (index + photos.length) % photos.length;
+
+        const next = photos[currentIndex];
+
+        // 前の切り替え処理をキャンセル
+        clearTimeout(transitionTimer);
+
+        photo.classList.add("is-changing");
+
+        transitionTimer = setTimeout(() => {
+
+            photo.src = next.src;
+            photo.alt = next.title;
+
+            counter.textContent =
+                `${String(currentIndex + 1).padStart(2, "0")} / ` +
+                `${String(photos.length).padStart(2, "0")}`;
+
+            title.textContent = next.title;
+
+            // ズーム演出を再スタート
+            photo.style.animation = "none";
+            void photo.offsetWidth;
+            photo.style.animation = "";
+
+            photo.classList.remove("is-changing");
+
+        }, reducedMotion ? 0 : 350);
+
+        resetProgress();
+    }
+
+    // 自動再生を止める
+    function stopAutoPlay() {
+
+        clearInterval(timer);
+        timer = null;
+
+        progressBar.style.transition = "none";
+    }
+
+    // 自動再生を開始
+    function startAutoPlay() {
+
+        stopAutoPlay();
+
+        if (!isPlaying || photos.length < 2) return;
+
+        resetProgress();
+
+        timer = setInterval(() => {
+            showCinemaPhoto(currentIndex + 1);
+        }, CINEMA_INTERVAL);
+    }
+
+    // 再生ボタンの表示更新
+    function updatePlayButton() {
+
+        playButton.textContent = isPlaying ? "❚❚" : "▶";
+
+        playButton.setAttribute(
+            "aria-label",
+            isPlaying ? "一時停止" : "再生"
+        );
+    }
+
+    // 映画館モードを開く
+    function openCinema() {
+
+        photos = getCinemaPhotos();
+
+        if (photos.length === 0) {
+            alert("ギャラリーに写真がありません。");
+            return;
+        }
+
+        currentIndex = 0;
+        isPlaying = true;
+
+        cinema.hidden = false;
+        cinema.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("cinema-active");
+
+        showCinemaPhoto(currentIndex);
+        updatePlayButton();
+        startAutoPlay();
+
+        closeButton.focus();
+    }
+
+    // 映画館モードを閉じる
+    function closeCinema() {
+
+        stopAutoPlay();
+        clearTimeout(transitionTimer);
+
+        cinema.hidden = true;
+        cinema.setAttribute("aria-hidden", "true");
+
+        document.body.classList.remove("cinema-active");
+
+        openButton.focus();
+    }
+
+    // 前の写真
+    prevButton.addEventListener("click", () => {
+
+        showCinemaPhoto(currentIndex - 1);
+        startAutoPlay();
+
+    });
+
+    // 次の写真
+    nextButton.addEventListener("click", () => {
+
+        showCinemaPhoto(currentIndex + 1);
+        startAutoPlay();
+
+    });
+
+    // 再生・一時停止
+    playButton.addEventListener("click", () => {
+
+        isPlaying = !isPlaying;
+
+        updatePlayButton();
+
+        if (isPlaying) {
+            startAutoPlay();
+        } else {
+            stopAutoPlay();
+        }
+
+    });
+
+    // 開く・閉じる
+    openButton.addEventListener("click", openCinema);
+    closeButton.addEventListener("click", closeCinema);
+
+    // ESCキーで閉じる
+    document.addEventListener("keydown", event => {
+
+        if (cinema.hidden) return;
+
+        if (event.key === "Escape") {
+            closeCinema();
+        }
+
+        if (event.key === "ArrowRight") {
+            nextButton.click();
+        }
+
+        if (event.key === "ArrowLeft") {
+            prevButton.click();
+        }
+
+    });
+
+})();
+
+// ==========================================
+// MINI GALLERY
+// 自動スクロール＋スワイプ＋写真拡大
+// ==========================================
+
+(() => {
+
+    const gallery = document.querySelector(".mini-gallery");
+    const track = document.getElementById("miniGalleryTrack");
+
+    if (!gallery || !track) return;
+
+    // 上のギャラリーに登録された写真
+    const slides = Array.from(
+        document.querySelectorAll(".slide")
+    ).filter(slide => slide.querySelector("img"));
+
+    if (slides.length === 0) return;
+
+    // 写真を3セット並べて無限ループさせる
+    for (let repeat = 0; repeat < 3; repeat++) {
+
+        slides.forEach(slide => {
+
+            const img = slide.querySelector("img");
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "mini-gallery-item";
+            button.setAttribute(
+                "aria-label",
+                `${img.alt || "コスプレ写真"}を拡大`
+            );
+
+            const miniImg = document.createElement("img");
+            miniImg.src = img.getAttribute("src");
+            miniImg.alt = "";
+            miniImg.className = "mini-gallery-photo";
+            miniImg.loading = "lazy";
+            miniImg.draggable = false;
+
+            button.appendChild(miniImg);
+
+            // タップで既存の拡大画面を開く
+            button.addEventListener("click", () => {
+                if (suppressClick) return;
+                slide.click();
+            });
+
+            track.appendChild(button);
+        });
+    }
+
+    // 動きを減らす設定
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // 1セット分の横幅
+    let setWidth = 0;
+
+    // 現在の移動位置
+    let position = 0;
+
+    // 自動で流れる速さ（px/秒）
+    const AUTO_SPEED = reducedMotion ? 0 : 28;
+
+    // スワイプの状態
+    let dragging = false;
+    let startX = 0;
+    let startPosition = 0;
+    let moved = false;
+    let suppressClick = false;
+
+    // サイズを計算
+    function measure() {
+        setWidth = track.scrollWidth / 3;
+
+        if (setWidth > 0) {
+            position = -setWidth;
+        }
+    }
+
+    // 位置をループ範囲内に収める
+    function wrapPosition() {
+        if (setWidth <= 0) return;
+
+        while (position <= -2 * setWidth) {
+            position += setWidth;
+        }
+
+        while (position > -setWidth) {
+            position -= setWidth;
+        }
+    }
+
+    // 画面上の位置を更新
+    function render() {
+        track.style.transform =
+            `translate3d(${position}px, 0, 0)`;
+    }
+
+    // 最初のサイズ計算
+    measure();
+    render();
+
+    // 画面サイズが変わったとき
+    window.addEventListener("resize", () => {
+        measure();
+        render();
+    });
+
+    // 自動スクロール
+    let lastTime = 0;
+
+    function animate(time) {
+
+        if (!lastTime) lastTime = time;
+
+        const delta = Math.min(
+            (time - lastTime) / 1000,
+            0.05
+        );
+
+        lastTime = time;
+
+        // 触っている間は自動移動を止めず、
+        // 指の動きを優先する
+        if (!dragging) {
+            position -= AUTO_SPEED * delta;
+        }
+
+        wrapPosition();
+        render();
+
+        requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+
+    // スワイプ開始
+    gallery.addEventListener("pointerdown", event => {
+
+        if (event.pointerType === "mouse" && event.button !== 0) {
+            return;
+        }
+
+        dragging = true;
+        moved = false;
+        suppressClick = false;
+
+        startX = event.clientX;
+        startPosition = position;
+
+        gallery.classList.add("is-dragging");
+    });
+
+    // スワイプ中
+    gallery.addEventListener("pointermove", event => {
+
+        if (!dragging) return;
+
+        const distance = event.clientX - startX;
+
+        if (Math.abs(distance) > 8) {
+            moved = true;
+        }
+
+        position = startPosition + distance;
+
+        wrapPosition();
+        render();
+    });
+
+    // スワイプ終了
+    function endDrag() {
+
+        if (!dragging) return;
+
+        dragging = false;
+        gallery.classList.remove("is-dragging");
+
+        if (moved) {
+            suppressClick = true;
+
+            // スワイプ直後の誤タップを防ぐ
+            setTimeout(() => {
+                suppressClick = false;
+            }, 150);
+        }
+    }
+
+    gallery.addEventListener("pointerup", endDrag);
+    gallery.addEventListener("pointercancel", endDrag);
+
+    // ギャラリーの外で指を離した場合
+    window.addEventListener("pointerup", endDrag);
+
+})();
