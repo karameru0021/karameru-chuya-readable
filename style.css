@@ -541,23 +541,6 @@ header {
     inset:0;
     background:linear-gradient(0deg,#100d0f 0%,transparent 50%),linear-gradient(90deg,#100d0f55,transparent 55%),#4b0c1928
 }
-/* トップ写真の切り替え演出 */
-#heroPhoto {
-    transition: opacity 0.8s ease;
-}
-
-/* 写真が切り替わる瞬間 */
-#heroPhoto.hero-fade {
-    opacity: 0;
-}
-
-/* 動きを減らす設定 */
-@media (prefers-reduced-motion: reduce) {
-    #heroPhoto {
-        transition: none;
-    }
-}
-
 .hero-content {
     position:relative;
     z-index:2;
