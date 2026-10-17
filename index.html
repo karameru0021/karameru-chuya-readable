@@ -508,9 +508,9 @@
        </button>
       </div>
      </div>
-     <p class="hint">
-      写真をタップすると拡大できます。
-     </p>
+     <div class="mini-gallery">
+    <div class="mini-gallery-track" id="miniGalleryTrack"></div>
+</div>
     </div>
    </section>
   
@@ -595,6 +595,101 @@
 
 </section>
 
+   <!-- ==================================
+     CINEMA MODE / 映画館モード
+================================== -->
+
+<!-- 映画館モードを開くボタン -->
+<button
+    id="cinemaOpen"
+    class="cinema-open-button"
+    type="button"
+>
+    <span>▶</span>
+    CINEMA MODE
+</button>
+
+<!-- 映画館モード本体 -->
+<div
+    id="cinemaMode"
+    class="cinema-mode"
+    role="dialog"
+    aria-modal="true"
+    aria-label="映画館モード"
+    aria-hidden="true"
+    hidden
+>
+
+    <!-- 上部 -->
+    <div class="cinema-header">
+        <span class="cinema-logo">
+            KARAMERU / CINEMA
+        </span>
+
+        <button
+            id="cinemaClose"
+            class="cinema-close"
+            type="button"
+            aria-label="映画館モードを閉じる"
+        >
+            ✕
+        </button>
+    </div>
+
+    <!-- 写真表示エリア -->
+    <div class="cinema-stage">
+        <img
+            id="cinemaPhoto"
+            class="cinema-photo"
+            src=""
+            alt="コスプレ写真"
+        >
+    </div>
+
+    <!-- 下部の操作パネル -->
+    <div class="cinema-controls">
+
+        <div class="cinema-caption">
+            <span id="cinemaCounter">01 / 01</span>
+            <strong id="cinemaTitle">COSPLAY</strong>
+        </div>
+
+        <div class="cinema-buttons">
+
+            <button
+                id="cinemaPrev"
+                type="button"
+                aria-label="前の写真"
+            >
+                ◀◀
+            </button>
+
+            <button
+                id="cinemaPlay"
+                type="button"
+                aria-label="一時停止"
+            >
+                ❚❚
+            </button>
+
+            <button
+                id="cinemaNext"
+                type="button"
+                aria-label="次の写真"
+            >
+                ▶▶
+            </button>
+
+        </div>
+
+        <!-- 再生進行バー -->
+        <div class="cinema-progress">
+            <div id="cinemaProgressBar"></div>
+        </div>
+
+    </div>
+
+</div>
 
    <section class="social" id="social">
     <div class="section-number reveal">
