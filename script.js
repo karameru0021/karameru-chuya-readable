@@ -131,73 +131,7 @@ if (document.readyState === 'loading') {
     startGravityIntro();
 
 }
-// ==========================================
-// トップ写真をランダムに切り替える
-// ==========================================
 
-// 表示したい写真をここに登録
-const heroPhotos = [
-    "assets/chuya.jpg",
-    "assets/IMG_9662.jpg",
-    "assets/IMG_9689.jpg"
-];
-
-// トップ画面の写真
-const heroPhoto = document.getElementById("heroPhoto");
-
-if (heroPhoto && heroPhotos.length > 0) {
-
-    // 現在表示している写真
-    let currentPhoto = -1;
-
-    // 写真をランダムに選ぶ
-    function getRandomPhoto() {
-        if (heroPhotos.length === 1) return 0;
-
-        let nextPhoto;
-
-        do {
-            nextPhoto = Math.floor(Math.random() * heroPhotos.length);
-        } while (nextPhoto === currentPhoto);
-
-        return nextPhoto;
-    }
-
-    // 写真を切り替える
-    function changeHeroPhoto() {
-
-        const nextPhoto = getRandomPhoto();
-
-        // 次の画像を先に読み込む
-        const preload = new Image();
-        preload.src = heroPhotos[nextPhoto];
-
-        preload.onload = () => {
-
-            // いったん透明にする
-            heroPhoto.classList.add("hero-fade");
-
-            setTimeout(() => {
-
-                // 写真を変更
-                heroPhoto.src = heroPhotos[nextPhoto];
-                currentPhoto = nextPhoto;
-
-                // ふわっと表示
-                heroPhoto.classList.remove("hero-fade");
-
-            }, 800);
-        };
-    }
-
-    // ページを開いたときにランダム表示
-    changeHeroPhoto();
-
-    // 5秒ごとに写真を変更
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        setInterval(changeHeroPhoto, 5000);
-    }
-}
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=> {
     if(entry.isIntersecting) {
         entry.target.classList.add('visible');revealObserver.unobserve(entry.target)
